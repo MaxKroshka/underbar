@@ -85,7 +85,12 @@
   };
 
   // Return all elements of an array that pass a truth test.
-  _.filter = function(collection, test) {};
+  _.filter = function(collection, test) {
+      return _.reduce(collection,function(acc,el){
+      if(test(el)){return acc.concat(el)}
+      else{return acc}
+  },[]);
+  };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
