@@ -86,23 +86,33 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
-      return _.reduce(collection,function(acc,el){
-      if(test(el)){return acc.concat(el)}
-      else{return acc}
-  },[]);
+    return _.reduce(collection, function(acc, el) {
+      if (test(el)) {
+        return acc.concat(el)
+      } else {
+        return acc
+      }
+    }, []);
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    return _.filter(collection,function(x){
+    return _.filter(collection, function(x) {
       return !(test(x))
     })
   };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function(array) {};
+  _.uniq = function(array) {
+    return _.reduce(array, function(acc, el) {
+      if (_.indexOf(acc, el) < 0) {
+        return acc.concat([el]);
+      }
+      return acc;
+    }, []);
+  };
 
 
   // Return the results of applying an iterator to each element.
@@ -151,17 +161,16 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-      if(accumulator === undefined){ 
+    if (accumulator === undefined) {
       accumulator = collection[0];
-      for(var i=1;i<collection.length;i++){
-       accumulator = iterator(accumulator,collection[i]); 
+      for (var i = 1; i < collection.length; i++) {
+        accumulator = iterator(accumulator, collection[i]);
       }
-  }
-    else{
-    _.each(collection, function(el){
-       accumulator = iterator(accumulator,el); 
-    });
-  }
+    } else {
+      _.each(collection, function(el) {
+        accumulator = iterator(accumulator, el);
+      });
+    }
     return accumulator;
   };
 
