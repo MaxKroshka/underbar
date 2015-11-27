@@ -359,6 +359,16 @@
     return result;
   };
 
+  // var _.shuffle = function(array){
+  // var newArr = array.slice();
+  // var result = _.flatten(_.map(array,function(element){
+  //  var newIndex = Math.floor(Math.random() * newArr.length);
+  //  var x = newArr.splice(newIndex,1);
+  //  return x;
+  // }));
+  // return result;
+  // };
+
 
   /**
    * ADVANCED
