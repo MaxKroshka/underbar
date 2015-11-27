@@ -344,7 +344,20 @@
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
-  _.shuffle = function(array) {};
+  _.shuffle = function(array) {
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+      var found = false;
+      while (!found) {
+        var newIndex = Math.floor(Math.random() * array.length);
+        if (result[newIndex] === undefined) {
+          result[newIndex] = array[i];
+          found = true;
+        }
+      }
+    }
+    return result;
+  };
 
 
   /**
