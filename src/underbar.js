@@ -202,10 +202,14 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-  if(iterator === undefined){iterator = _.identity}
+    if (iterator === undefined) {
+      iterator = _.identity
+    }
     // TIP: Try re-using reduce() here.
-    return _.reduce(collection, function(match,item){
-      if(!match){return false}
+    return _.reduce(collection, function(match, item) {
+      if (!match) {
+        return false
+      }
       return !!iterator(item);
     }, true);
   };
@@ -214,9 +218,11 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-  if(iterator === undefined){iterator = _.identity}
-    return !(_.every(collection, function(item){
-        return !iterator(item);
+    if (iterator === undefined) {
+      iterator = _.identity
+    }
+    return !(_.every(collection, function(item) {
+      return !iterator(item);
     }));
   };
 
@@ -239,11 +245,29 @@
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {};
+  _.extend = function(obj) {
+    _.each(arguments, function(el) {
+      for (var x in el) {
+        obj[x] = el[x];
+      }
+    });
+    return obj;
+  };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function(obj) {};
+  _.defaults = function(obj) {
+    var keys = Object.keys(obj);
+    _.each(arguments, function(el) {
+      for (var x in el) {
+        if (_.indexOf(keys, x) === -1) {
+          obj[x] = el[x];
+        }
+        keys = Object.keys(obj);
+      }
+    });
+    return obj;
+  };
 
 
   /**
@@ -285,7 +309,7 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
-  _.memoize = function(func) {};
+  _.memoize = function(func(){};
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
