@@ -345,24 +345,28 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
-  var newArr = array.slice();
-  return _.map(array,function(element){
-    var newIndex = Math.floor(Math.random() * newArr.length);
-    var x = newArr.splice(newIndex,1);
-    return x[0];
-  });
+    var newArr = array.slice();
+    return _.map(array, function(element) {
+      var newIndex = Math.floor(Math.random() * newArr.length);
+      var x = newArr.splice(newIndex, 1);
+      return x[0];
+    });
   };
 
-  // var _.shuffle = function(array){
-  // var newArr = array.slice();
-  // var result = _.flatten(_.map(array,function(element){
-  //  var newIndex = Math.floor(Math.random() * newArr.length);
-  //  var x = newArr.splice(newIndex,1);
-  //  return x;
-  // }));
-  // return result;
+  // _.shuffle = function(array) {
+  //    var result = [];
+  //    for (var i = 0; i < array.length; i++) {
+  //      var found = false;
+  //      while (!found) {
+  //        var newIndex = Math.floor(Math.random() * array.length);
+  //        if (result[newIndex] === undefined) {
+  //          result[newIndex] = array[i];
+  //          found = true;
+  //        }
+  //      }
+  //    }
+  //    return result;
   // };
-
 
   /**
    * ADVANCED
@@ -374,7 +378,13 @@
 
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
-  _.invoke = function(collection, functionOrKey, args) {};
+  _.invoke = function(collection, functionOrKey, args) {
+
+    return _.map(collection, function(item){
+      var method = typeof functionOrKey === "string" ? item[functionOrKey] : functionOrKey;
+      return method.apply(item, args);
+    });
+  };
 
   // Sort the object's values by a criterion produced by an iterator.
   // If iterator is a string, sort objects by that property with the name
